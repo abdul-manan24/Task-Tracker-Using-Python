@@ -1,6 +1,12 @@
 if __name__ == "__main__":
     class task_tracker_operation:
 
+        def id_generater():
+                current_id = 1
+                while current_id < 1000:
+                    yield current_id
+                    current_id += 1
+
         def add_task(task:str):
             task_information = {}
             with open("tasks.json", 'w') as task_file:
@@ -23,15 +29,7 @@ if __name__ == "__main__":
 
         def list_remaining_tasks():
             pass
-    class utility_functions:
-        @staticmethod
-        def id_generater():
-            current_id = 1
-            while current_id < 1000:
-                yield current_id
-                current_id += 1
-
-    class main:
-        current_id = next(utility_functions.id_generater())
+        
+        current_id = next(id_generater())
         print(current_id)
             
