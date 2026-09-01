@@ -1,3 +1,6 @@
+import os
+import json
+
 if __name__ == "__main__":
     class task_tracker_operation:
 
@@ -8,9 +11,17 @@ if __name__ == "__main__":
                     current_id += 1
 
         def add_task(task:str):
-            task_information = {}
-            with open("tasks.json", 'w') as task_file:
-                pass
+
+            if not os.path.isfile("tasks.json"):
+                with open("tasks.json", 'w'):
+                    pass
+
+            task_id = next(task_tracker_operation.id_generater())
+
+            task_information = {task_id:task}
+
+            with open("tasks.json", 'a') as task_file:
+                json.dump(task_information, task_file, indent=2)
 
         def delete_task():
             pass
@@ -30,6 +41,8 @@ if __name__ == "__main__":
         def list_remaining_tasks():
             pass
         
-        current_id = next(id_generater())
-        print(current_id)
+        
+
+        user_task = input()
+        add_task(user_task)
             
