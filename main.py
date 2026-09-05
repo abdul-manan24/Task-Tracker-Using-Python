@@ -12,7 +12,7 @@ if __name__ == "__main__":
                     current_id += 1
 
         global task_id; 
-        task_id = next(id_generater())            
+        # task_id = next(id_generater())            
 
         @staticmethod
         def add_task(task:str):
@@ -22,6 +22,7 @@ if __name__ == "__main__":
                     pass
 
             global task_id
+            task_id = next(task_tracker_operation.id_generater())
             task_information = {task_id:{"Description":task}}
 
 
@@ -49,20 +50,24 @@ if __name__ == "__main__":
         @staticmethod
         def take_input():
             while True:
-                input_info = list(input().split('"'))
-                input_info.pop()
-                input_info[0].strip()
+                input_info = list(input().split(' ', 1))
+                # input_info[0].strip()
+
                 if input_info[0].lower() == "exit":
                     break
+
                 function_to_call, task_description = input_info
+                print(function_to_call, task_description)
 
                 match function_to_call:
                     case "add":
                         task_tracker_operation.add_task(task_description)
+                    case _:
+                        "Task not added"
         
 
 
-        take_input()
+task_tracker_operation.take_input()
         # while True:
         #     user_task = input()
         #     if len(user_task) == 0:
