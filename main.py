@@ -101,7 +101,7 @@ def list_all_tasks():
         print()
 
 
-def list_completed_tasks():
+def list_done_tasks():
     if not os.path.isfile("tasks.json"):
         print("File does not exist, please add tasks first!")
         return
@@ -135,7 +135,7 @@ def list_in_progress_tasks():
             print()
 
 
-def list_remaining_tasks():
+def list_to_do_tasks():
     if not os.path.isfile("tasks.json"):
         print("File does not exist, please add tasks first!")
         return
@@ -145,7 +145,7 @@ def list_remaining_tasks():
             
     print("\n------Listing All Remaining Tasks------\n")
     for key, value in task_information.items():
-        if value["Status"] != "done":
+        if value["Status"] == "to-do":
             print(f"----Task ID {key}----")
             print(f"'{value["Description"]}'")
             print(f"Task status: {value["Status"]}, Created at: {value["Created at"]}, Updated at: {value.get("Updated at")}")
@@ -155,7 +155,7 @@ def list_remaining_tasks():
 def take_input():
 
     while True:
-        input_info = list(input().split(' ', 1))
+        input_info = list(input("task-cli ").split(' ', 1))
 
         if input_info[0].lower() == "exit":
             break
@@ -188,6 +188,10 @@ def take_input():
                 function_to_call = "mark"
                 task_id = task_description
                 status = "to-do"
+
+            if function_to_call.lower() == "list":
+                input_info = function_to_call, task_description
+                function_to_call = " ".join(input_info)
         
             task_description = task_description.strip("\"")
         else:
@@ -210,14 +214,14 @@ def take_input():
             case "list":
                 list_all_tasks()
 
-            case "list-in-progress":
+            case "list in-progress":
                 list_in_progress_tasks()
 
-            case "list-completed":
-                list_completed_tasks()
+            case "list done":
+                list_done_tasks()
 
-            case "list-remaining":
-                list_remaining_tasks()
+            case "list to-do":
+                list_to_do_tasks()
 
             case _:
                 "Task not added"
