@@ -41,4 +41,4 @@ Mark Done:
 To mark a task as done write 'mark-done' followed by task id.
 e.g. mark-done 3
 
-Project URL: https://github.com/abdul-manan24/Task-Tracker-Using-Python
+Project Link: https://roadmap.sh/projects/task-tracker
